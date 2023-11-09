@@ -1,11 +1,11 @@
 @font-face {
     font-family: valorant;
-    src: url(Valorant.ttf);
+    src: url(../SIA/Font/Valorant.ttf);
   }
 
   @font-face {
     font-family: 'digital-7';
-    src: url('clock.ttf');
+    src: url(../SIA/Font/clock.ttf);
   }
 
 .container{
@@ -42,8 +42,6 @@
     font-family: valorant ;
     font-size: 3rem;
     color: white;
-    fo
-    
    }
 
    .schedule,.feed{
@@ -101,7 +99,7 @@
        padding: 0;
    }
    body {
-     background-image: url('/koi-fish-dark-byrotek-1850429-wallhere.com.jpg');
+     background-image: url('../SIA/background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg');
     font-family: 'digital-7', sans-serif;
      display: flex;
      background-size:cover;
@@ -290,7 +288,6 @@
    }
    
    @media (max-width:320px) {
-     .date-field div p {}
      .clock-field div p {
          font-size: 40px;
      }
