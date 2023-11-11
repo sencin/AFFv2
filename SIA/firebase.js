@@ -10,20 +10,17 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
   
-let scheduletime, spintimes, feednow;
- let timersCount = 0;
- 
+let scheduletime, spintimes,timerPath, feednow;
+
+let timersCount = 0;
 
  document.querySelector("#inputsave").onclick = function () {
     scheduletime = document.querySelector("#inputtime").value;
     spintimes = document.querySelector("#inputspin").value;
      timersCount++;
-     let timerPath = `AFFV2/timers/timer${timersCount}`;
+     timerPath = `AFFV2/timers/timer${timersCount}`;
   
-  firebase
-    .database()
-    .ref(timerPath)
-    .set({
+  firebase.database().ref(timerPath).set({
       schedule : scheduletime,
       spin : spintimes
     });
@@ -35,63 +32,12 @@ let scheduletime, spintimes, feednow;
 document.querySelector("#feedbtn").onclick = function () {
     feednow = document.querySelector("#feedbtn").value;
     
-    const timerPath = `AFFV2/timers/${timersCount}`;
+   // const timerPath = `AFFV2/timers/${timersCount}`;
 
   firebase
-    .database()
-    .ref('feednow')
-    .set({
+    .database().ref('feednow').set({
       feednow : 1  
     });
     
   alert("Data Inserted");
 };
-
-
-
-/*
-document.getElementById("read").onclick = function () {
-  readFom();
-
-  firebase
-    .database()
-    .ref("student/" + rollV)
-    .on("value", function (snap) {
-      document.getElementById("roll").value = snap.val().rollNo;
-      document.getElementById("name").value = snap.val().name;
-      document.getElementById("gender").value = snap.val().gender;
-      document.getElementById("address").value = snap.val().address;
-    });
-};
-*/
-
-/*document.getElementById("update").onclick = function () {
-  readFom();
-
-  firebase
-    .database()
-    .ref("student/" + rollV)
-    .update({
-      //   rollNo: rollV,
-      name: nameV,
-      gender: genderV,
-      address: addressV,
-    });
-  alert("Data Update");
-  document.getElementById("roll").value = "";
-  document.getElementById("name").value = "";
-  document.getElementById("gender").value = "";
-  document.getElementById("address").value = "";
-};
-*/
-document.getElementById("delete").onclick = function () {
-  readFom();
-
-  firebase
-    .database()
-    .ref(timerPath)
-    .remove();
-  alert("Data Deleted");
- 
-};
-
