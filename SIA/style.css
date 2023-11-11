@@ -20,12 +20,12 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#userinput {
-    visibility: hidden;
+.toggle {
+
     background-color: #04AA6D;
     width: 50%;
     height: 25%;
-    
+    display: none;
     margin: auto;
     margin-top: 50px;
     object-position: center;

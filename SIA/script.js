@@ -1,18 +1,24 @@
 
-let btn = document.querySelector('#btn'); 
-let hiddenDiv = document.querySelector('#userinput');
 
-function pushbutton(){
-   
-   if(hiddenDiv.style.visibility == 'visible'){
-        hiddenDiv.style.visibility ='hidden';
-        
-   }
-   else{
-     hiddenDiv.style.visibility = 'visible';
-    // btn.style.visibility = 'hidden';
-   }
+function backbutton(){
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const back = function() {
     btn.style.visibility = 'visible';
