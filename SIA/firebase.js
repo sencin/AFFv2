@@ -32,10 +32,8 @@ let timersCount = 0;
 document.querySelector("#feedbtn").onclick = function () {
     feednow = document.querySelector("#feedbtn").value;
     
-   // const timerPath = `AFFV2/timers/${timersCount}`;
 
-  firebase
-    .database().ref('feednow').set({
+  firebase.database().ref('feednow').set({
       feednow : 1  
     });
     
