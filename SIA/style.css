@@ -353,3 +353,9 @@
 .csssave:focus-visible{
     outline-offset: 1px;
 }
+
+.timer {
+  border: 2px solid #ffffff;
+  display: inline-block;
+  margin: 5px 15px;
+}
