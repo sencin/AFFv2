@@ -27,7 +27,7 @@ let timersCount = 0;
       spin : spintimes
     });
     
-  alert("Data Inserted");
+  alert("Data Inserted Onii-chan");
   readDataFromFirebase();
 };
 
@@ -40,7 +40,7 @@ document.querySelector("#feedbtn").onclick = function () {
       feednow : 1  
     });
     
-  alert("Data Inserted");
+  alert("Yametee oniichan");
 };
 
 
