@@ -201,7 +201,7 @@ function displayDataInHtml(data) {
 
         if (timerInstance.spin) {
       
-          htmlContent += "<p>Spin Property: " + timerInstance.spin.someProperty + "</p>";
+          htmlContent += "<p>Spin Property: " + timerInstance.spin + "</p>";
         }
 
   
