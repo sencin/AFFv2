@@ -12,6 +12,8 @@ const firebaseConfig = {
   
 let scheduletime, spintimes,timerPath, feednow;
 
+readDataFromFirebase();
+
 let timersCount = 0;
 
  document.querySelector("#inputsave").onclick = function () {
@@ -26,6 +28,7 @@ let timersCount = 0;
     });
     
   alert("Data Inserted");
+  readDataFromFirebase();
 };
 
 
@@ -39,3 +42,62 @@ document.querySelector("#feedbtn").onclick = function () {
     
   alert("Data Inserted");
 };
+
+
+function TimerData(timerKey, schedule, spin) {
+  this.timerKey = timerKey;
+  this.schedule = schedule;
+  this.spin = spin;
+}
+
+
+function readDataFromFirebase() {
+  var database = firebase.database();
+  var dataRef = database.ref('AFFV2/timers');
+
+  dataRef.on('value', function(snapshot) {
+    var data = snapshot.val();
+
+
+    displayDataInHtml(data);
+  }, function(error) {
+    console.error("Error reading data: " + error.code);
+  });
+}
+
+
+function displayDataInHtml(data) {
+  var dataDisplayDiv = document.getElementById('dataDisplay');
+
+  if (dataDisplayDiv && data) {
+   
+    dataDisplayDiv.innerHTML = "";
+
+  
+    for (var timerKey in data) {
+      if (data.hasOwnProperty(timerKey)) {
+        var timerData = data[timerKey];
+
+
+        var timerInstance = new TimerData(timerKey, timerData.schedule, timerData.spin);
+
+   
+        var htmlContent = "<div class='timer'>";
+        htmlContent += "<p>Timer: " + timerInstance.timerKey + "</p>";
+        htmlContent += "<p>Schedule: " + timerInstance.schedule + "</p>";
+
+   
+        if (timerInstance.spin) {
+    
+          htmlContent += "<p>Spin Property: " + timerInstance.spin + "</p>";
+        }
+
+        htmlContent += "</div>";
+
+    
+        dataDisplayDiv.innerHTML += htmlContent;
+      }
+    }
+  }
+}
+
