@@ -19,15 +19,15 @@ let timersCount = 0;
  document.querySelector("#inputsave").onclick = function () {
     scheduletime = document.querySelector("#inputtime").value;
     spintimes = document.querySelector("#inputspin").value;
-     timersCount++;
+    
      timerPath = `AFFV2/timers/timer${timersCount}`;
-  
+     timersCount++;
   firebase.database().ref(timerPath).set({
       schedule : scheduletime,
       spin : spintimes
     });
     
-  alert("Data Inserted Onii-chan");
+  alert("Data Inserted");
   readDataFromFirebase();
 };
 
@@ -40,7 +40,7 @@ document.querySelector("#feedbtn").onclick = function () {
       feednow : 1  
     });
     
-  alert("Yametee oniichan");
+  alert("Thank Youu for The Food Hooman");
 };
 
 
