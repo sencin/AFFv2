@@ -1,11 +1,11 @@
 @font-face {
     font-family: valorant;
-    src: url(../SIA/Font/Valorant.ttf);
+    src: url(Font/Valorant.ttf);
   }
 
   @font-face {
-    font-family: 'digital-7';
-    src: url(../SIA/Font/clock.ttf);
+    font-family: digital-7;
+    src: url(Font/clock.ttf);
   }
 
 .container{
@@ -80,27 +80,14 @@
     text-align: center;
 }
 
-
-
-
-
-
-
-
-
-/*DIGITAL CLOCK FONT*/
-@font-face{
-    font-family:'digital-7';
-    src: url('../SIA/clock.ttf');
-   }
    
    * {
        margin: 0;
        padding: 0;
    }
    body {
-     background-image: url('../SIA/background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg');
-    font-family: 'digital-7', sans-serif;
+     background-image: url('background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg');
+    font-family: digital-7, sans-serif;
      display: flex;
      background-size:cover;
      flex-direction: column;

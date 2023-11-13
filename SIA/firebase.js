@@ -36,9 +36,10 @@ document.querySelector("#feedbtn").onclick = function () {
     feednow = document.querySelector("#feedbtn").value;
     
 
-  firebase.database().ref('feednow').set({
-      feednow : 1  
-    });
+    firebase.database().ref().update({
+      feednow: 1
+      
+  });
     
   alert("Thank Youu for The Food Hooman");
 };
