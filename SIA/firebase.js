@@ -160,6 +160,7 @@ function deleteDataFromFirebase(timerKey) {
           });
       } else {
         // Data does not exist
+        document.querySelector("#dataDisplay").innerHTML = "---------------";
         console.log("No data found for deletion");
         alert("No Data Please add some in the Schedule");
       }
