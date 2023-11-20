@@ -67,80 +67,6 @@ function readDataFromFirebase() {
   });
 }
 
-// Function to display data in an HTML div
-// function displayDataInHtml(data) {
-//   var dataDisplayDiv = document.getElementById('dataDisplay');
-
-//   if (dataDisplayDiv && data) {
-//     // Clear previous content
-//     dataDisplayDiv.innerHTML = "";
-
-//     // Loop through each child node
-//     for (var timerKey in data) {
-//       if (data.hasOwnProperty(timerKey)) {
-//         var timerData = data[timerKey];
-
-//         // Create an instance of TimerData using the constructor
-//         var timerInstance = new TimerData(timerKey, timerData.schedule, timerData.spin);
-
-//         // Create a new div element
-//         var timerDiv = document.createElement('div');
-//         timerDiv.classList.add('timer');
-
-//         // Create HTML content using the instance
-//         var htmlContent = "<p>Timer: " + timerInstance.timerKey + "</p>";
-//         htmlContent += "<p>Schedule: " + timerInstance.schedule + "</p>";
-
-//         // Check if "spin" is present before displaying
-//         if (timerInstance.spin) {
-//           // Include spin-related content
-//           // For example, assuming spin has a property named "someProperty"
-//           htmlContent += "<p>Spin Property: " + timerInstance.spin + "</p>";
-//         }
-
-//         // Add event listener for the click event
-//         timerDiv.addEventListener('click', function() {
-//           // Prompt the user for confirmation
-//           var userResponse = confirm("Do you want to delete or go back?");
-          
-//           if (userResponse) {
-//             // If user chooses to delete, remove the corresponding data from Firebase
-//             deleteDataFromFirebase(timerInstance.timerKey);
-//           } else {
-//             // If user chooses to go back, you can handle this as needed
-//             // For example, navigate to a different page or perform another action
-//           }
-//         });
-
-//         // Set the inner HTML of the div
-//         timerDiv.innerHTML = htmlContent;
-
-//         // Append the div to the parent container
-//         dataDisplayDiv.appendChild(timerDiv);
-//       }
-//     }
-//   }
-// }
-
-
-
-
-// // Function to delete data from Realtime Database
-// function deleteDataFromFirebase(timerKey) {
-//   var database = firebase.database();
-//   var dataRef = database.ref('AFFV2/timers/' + timerKey);
-
-//   // Remove the data from Firebase
-//   dataRef.remove()
-//     .then(function() {
-//       console.log("Data removed successfully!");
-//     })
-//     .catch(function(error) {
-//       console.error("Error removing data: " + error.message);
-//     });
-// }
-
-
 
 function deleteDataFromFirebase(timerKey) {
   var database = firebase.database();
@@ -149,20 +75,34 @@ function deleteDataFromFirebase(timerKey) {
 
   dataRef.once('value')
     .then(function(snapshot) {
+
+
       if (snapshot.exists()) {
  
         dataRef.remove()
           .then(function() {
             console.log("Data removed successfully!");
+            
+            const pathReference = database.ref("/AFFV2");
+              // Use the once method to check if the path exists
+            pathReference.once('value')
+  .           then((snapshot) => {
+              if (snapshot.exists()) 
+              {
+                console.log("Path exists");
+              } else 
+              {
+                document.querySelector("#dataDisplay").innerHTML = "--------NULL---------";
+                  console.log("Path does not exist");
+              }
+             })
           })
           .catch(function(error) {
             console.error("Error removing data: " + error.message);
           });
       } else {
         // Data does not exist
-        document.querySelector("#dataDisplay").innerHTML = "---------------";
         console.log("No data found for deletion");
-        alert("No Data Please add some in the Schedule");
       }
     })
     .catch(function(error) {
