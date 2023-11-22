@@ -44,7 +44,7 @@
     color: white;
    }
 
-   .schedule,.feed{
+   .schedule,.feed,.monitor{
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -322,8 +322,6 @@
     text-overflow: ellipsis;
     transition: all .14s ease-out;
     white-space: nowrap;
-   
-
 }
    
 .cssback:hover {
@@ -345,4 +343,68 @@
   border: 2px solid #ffffff;
   display: inline-block;
   margin: 5px 15px;
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 450px) {
+  
+  .timer {
+    border: 2px solid #ffffff;
+    display: inline-block;
+    margin: 5px 15px;
+    font-size: 1rem;
+}
+  
+  .toggle {
+    background-color: #04AA6D;
+    width: 90%;
+    height: 25%;
+    display: none;
+    margin: auto;
+    margin-top: 50px;
+    object-position: center;
+    border: solid 3px #ffffff;
+    border-radius: 6px;
+    background-color: #000000;
+}
+
+
+  .lbltitle {
+    padding-top: 50px;
+    font-family: valorant;
+    font-size: 2rem;
+    color: white;
+}
+
+
+  body {
+    font-size: 14px;
+    /* Add specific styles for screens around 6.67 inches here */
+  }
+
+  .container{
+    height: 50rem;
+    margin: auto;
+    text-align: center;
+    border-radius: 30px;
+    border: solid 3px #ffffff;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+body {
+    background-image: url(background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg);
+    font-family: digital-7, sans-serif;
+    display: flex;
+    background-size: cover;
+    flex-direction: row;
+    justify-content: center;
+    background-position: center;
+}
+
+
+
+
+
 }

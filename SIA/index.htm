@@ -114,6 +114,7 @@
             <button class="feed" id="feedbtn">FEED NOW</button>
             <button id="btn" class="schedule" onclick="toggleDiv('userinput')">SCHEDULE</button> 
             <button class="schedule" id="schedulebtn" onclick="toggleDiv('mysched')">MY SCHEDULES</button>
+            <button class="monitor" onclick="toggleDiv('status')">Status</button>
         <div id="userinput" class="toggle">
             <p>Enter Time To Schedule </p>
             <input class="csstime" id="inputtime" type="time" placeholder="Enter Time">
@@ -124,8 +125,20 @@
             <button class="cssback" onclick="backbutton()">Back</button>
         </div>
           <div id="mysched" style="color: white;" class="toggle">
-            <p>Scheduled Time</p>
-            <div id="dataDisplay"></div>
+            <p style="font-size: 1rem;">Scheduled Time</p>
+            <div id="dataDisplay">--------NULL---------</div>
+
+            <button class="cssback" onclick="backbutton()">Back</button>
+        </div>
+
+        <div id="status" style="color: white;" class="toggle">
+            <p>BATTERY LEVEL</p>
+            <p>-----------</p>
+            <br>    
+            <br>
+             <p>REMAINING FOOD</p>
+             <p>--------------</p>
+            
 
             <button class="cssback" onclick="backbutton()">Back</button>
         </div>
