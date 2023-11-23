@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFF PROJECT V2</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://images.vexels.com/media/users/3/137595/isolated/preview/01659b1dfbf775987bb67694efecb851-fishing-fish-logo-icon.png">
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+</head>
+<body>
+    <div class="container">
+        <p class="lbltitle"> AUTOMATIC FISH FEEDER</p>
+        <br>
+        <main class="clock-display">
+            <h1>CURRENT TIME</h1>
+            <div class="date-field">
+                <div class="day-of-week">
+                    <p class="day-alpha"></p>
+                    <p class="placeholder">mmmmmmmmm</p>
+                    <p class="placeholder">ooooooooo</p>
+                    <p class="placeholder">nnnnnnnnn</p>
+                    <p class="placeholder">ttttttttt</p>
+                    <p class="placeholder">uuuuuuuuu</p>
+                    <p class="placeholder">eeeeeeeee</p>
+                    <p class="placeholder">sssssssss</p>
+                    <p class="placeholder">wwwwwwwww</p>
+                    <p class="placeholder">hhhhhhhhh</p>
+                    <p class="placeholder">rrrrrrrrr</p>
+                    <p class="placeholder">fffffffff</p>
+                    <p class="placeholder">iiiiiiiii</p>
+                    <p class="placeholder">ddddddddd</p>
+                    <p class="placeholder">aaaaaaaaa</p>
+                    <p class="placeholder">yyyyyyyyy</p>
+                </div>
+                <div class="day-of-week-mobile">
+                    <p class="day-alpha-mobile"></p>
+                    <p class="placeholder">mmm</p>
+                    <p class="placeholder">ooo</p>
+                    <p class="placeholder">nnn</p>
+                    <p class="placeholder">ttt</p>
+                    <p class="placeholder">uuu</p>
+                    <p class="placeholder">eee</p>
+                    <p class="placeholder">sss</p>
+                    <p class="placeholder">www</p>
+                    <p class="placeholder">hhh</p>
+                    <p class="placeholder">rrr</p>
+                    <p class="placeholder">fff</p>
+                    <p class="placeholder">iii</p>
+                </div>
+                <div class="month">
+                    <p class="month-alpha"></p>
+                    <p class="placeholder">mmm</p>
+                    <p class="placeholder">ooo</p>
+                    <p class="placeholder">nnn</p>
+                    <p class="placeholder">ttt</p>
+                    <p class="placeholder">uuu</p>
+                    <p class="placeholder">eee</p>
+                    <p class="placeholder">sss</p>
+                    <p class="placeholder">www</p>
+                    <p class="placeholder">hhh</p>
+                    <p class="placeholder">rrr</p>
+                    <p class="placeholder">fff</p>
+                    <p class="placeholder">iii</p>
+                    <p class="placeholder">ddd</p>
+                    <p class="placeholder">aaa</p>
+                    <p class="placeholder">yyy</p>
+                    <p class="type">month</p>
+                </div>
+                <div class="date">
+                    <p class="date-number"></p>
+                    <p class="placeholder">88</p>
+                    <p class="type">day</p>
+                </div>
+                <div class="year">
+                    <p class="year-number"></p>
+                    <p class="placeholder">8888</p>
+                    <p class="type">year</p>
+                </div>
+            </div>
+            <div class="clock-field">
+                <div class="numbers">
+                    <p class="hours"></p>
+                    <p class="placeholder">88</p>
+                    <p class="type">hour</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="numbers">
+                    <p class="minutes"></p>
+                    <p class="placeholder">88</p>
+                    <p class="type">minute</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="numbers">
+                    <p class="seconds"></p>
+                    <p class="placeholder">88</p>
+                    <p class="type">second</p>
+                </div>
+                <div class="am-pm">
+                    <div>
+                        <p class="am">am</p>
+                    </div>
+                    <div>
+                        <p class="pm">pm</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+         <br>
+            <button class="feed" id="feedbtn">FEED NOW</button>
+            <button id="btn" class="schedule" onclick="toggleDiv('userinput')">SCHEDULE</button> 
+            <button class="schedule" id="schedulebtn" onclick="toggleDiv('mysched')">MY SCHEDULES</button>
+            <button class="monitor" onclick="toggleDiv('status')">Status</button>
+        <div id="userinput" class="toggle">
+            <p>-------------------</p>
+            <input class="csstime" id="inputtime" type="time" placeholder="Enter Time">
+            <br>
+            <input class="cssspin" id="inputspin" type="number" placeholder="CUSTOMIZE SPIN">
+            <br>
+            <button class="csssave" id="inputsave">Save</button>
+            <button class="cssback" onclick="backbutton()">Back</button>
+        </div>
+          <div id="mysched" style="color: white;" class="toggle">
+            <div id="dataDisplay" class="ddisplay">--------NULL---------</div>
+
+            <button class="cssback" onclick="backbutton()">Back</button>
+            <button class="cssback" id="clear">clear all</button>
+        </div>
+
+        <div id="status" style="color: white;" class="toggle">
+            <p>BATTERY LEVEL</p>
+            <p>-----------</p>
+            <br>    
+            <br>
+             <p>REMAINING FOOD</p>
+             <p>--------------</p>
+            
+
+            <button class="cssback" onclick="backbutton()">Back</button>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="firebase.js"></script>
+    <script src="toggle.js"></script>
+</body>
+</html>
