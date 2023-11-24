@@ -30,7 +30,7 @@ document.querySelector("#inputsave").onclick = function () {
 
   // Check if either scheduletime or spintimes is empty
   if (scheduletime.trim() === "" || spintimes.trim() === "") {
-    alert("Please enter both a valid schedule time and spin time (spin time should be 1-10).");
+    alert("Please enter both a valid schedule time and spin value (spin value should be 1-10).");
     // You may choose to handle this case in a way that fits your application
     return; // Stop further execution if one of the fields is empty
   }
@@ -47,7 +47,7 @@ document.querySelector("#inputsave").onclick = function () {
     alert("Data Inserted");
     readDataFromFirebase();
   } else {
-    alert("Please enter a valid spin time (1 to 10).");
+    alert("Please enter a valid spin value (1 to 10).");
     // You may choose to handle this case in a way that fits your application
   }
 };
