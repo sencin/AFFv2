@@ -118,7 +118,7 @@
             <button class="monitor" onclick="toggleDiv('status')">Status</button>
         <div id="userinput" class="toggle">
             <p>-------------------</p>
-            <input class="csstime" id="inputtime" type="time" placeholder="Enter Time">
+            <input class="csstime " id="inputtime" type="time" placeholder="Enter Time">
             <br>
             <input class="cssspin" id="inputspin" type="number" placeholder="HOW MANY SPINS">
             <br>
@@ -129,17 +129,22 @@
             <div id="dataDisplay" class="ddisplay">--------NULL---------</div>
 
             <button class="cssback" onclick="backbutton()">Back</button>
-            <button class="cssback" id="clear">clear all</button>
+            <button class="cssback" id="clear">Clear all</button>
         </div>
 
-        <div id="status" style="color: white;" class="toggle">
-            <p>BATTERY LEVEL</p>
-            <p>-----------</p>
+        <div id="status" style="color: white; padding-top: 10px; font-family: 'Courier New', Courier, monospace;" class="toggle">
+            <p class="txt">BATTERY LEVEL</p>
+            <p class="txt">-----------</p>
             <br>    
-            <br>
-             <p>REMAINING FOOD</p>
-             <p>--------------</p>
             
+             <p class="txt">REMAINING FOOD</p>
+             <p class="txt">--------------</p>
+             <br>    
+        
+            <p class="txt">RECENT FED</p>
+            <p class="txt">--------------</p>
+            <p class="txt">Under Development</p>
+
 
             <button class="cssback" onclick="backbutton()">Back</button>
         </div>
