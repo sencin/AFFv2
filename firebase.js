@@ -36,7 +36,7 @@ document.querySelector("#inputsave").onclick = function () {
   }
 
   // Check if spintimes is a valid non-negative number
-  if (spintimes >= 1 && spintimes<=10) {
+  if (Number.isInteger(Number(spintimes))&& spintimes >= 1 && spintimes<=10) {
     timerPath = `AFFV2/timers/timer${timersCount}`;
     timersCount++;
     firebase.database().ref(timerPath).set({
