@@ -1,4 +1,4 @@
-
+// DYNAMIC DIGITAL TIMER FUNCTION
 const back = function() {
     btn.style.visibility = 'visible';
     hiddenDiv.style.visibility ='hidden';

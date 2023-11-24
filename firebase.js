@@ -1,3 +1,6 @@
+
+// THIS IS THE CONFIG OF OUR FIREBASE REAL TIME DATABASE
+
 const firebaseConfig = {
     apiKey: "AIzaSyC0WToORO9UG83T1MlsudbVripZ7FdGli0",
     authDomain: "frenzy-ecfc7.firebaseapp.com",
@@ -8,21 +11,26 @@ const firebaseConfig = {
     appId: "1:783829962407:web:35b6506ef000dd682fd582"
   };
 
-  firebase.initializeApp(firebaseConfig);
+// INITIALIZE FIREBASE
+firebase.initializeApp(firebaseConfig);
   
-let scheduletime, spintimes,timerPath, feednow, numberOfChildrenAsInt;
+let timerPath, numberOfChildrenAsInt;
+let timersCount = 0;
 
 readDataFromFirebase();
 
-let timersCount = 0;
+ 
+// SCHEDULE FEEDING
+document.querySelector("#inputsave").onclick = function () {
+  
+  let scheduletime, spintimes;
 
- document.querySelector("#inputsave").onclick = function () {
-    scheduletime = document.querySelector("#inputtime").value;
-    spintimes = document.querySelector("#inputspin").value;
+      scheduletime = document.querySelector("#inputtime").value;
+      spintimes = document.querySelector("#inputspin").value;
     
-     timerPath = `AFFV2/timers/timer${timersCount}`;
-     timersCount++;
-  firebase.database().ref(timerPath).set({
+      timerPath = `AFFV2/timers/timer${timersCount}`;
+      timersCount++;
+      firebase.database().ref(timerPath).set({
       schedule : scheduletime,
       spin : spintimes
     });
@@ -32,48 +40,40 @@ let timersCount = 0;
 };
 
 
-document.querySelector("#feedbtn").onclick = function () {
-    feednow = document.querySelector("#feedbtn").value;
-    
 
+// MANUAL FEEDING FUNCTION
+document.querySelector("#feedbtn").onclick = function () {
     firebase.database().ref().update({
-      feednow: 1
-      
+      feednow: 1 
   });
-    
-  alert("Thank Youu for The Food Hooman");
+  alert("Thank You for The Food");
 };
 
 
-// Define a constructor for your data nodes
-function TimerData(timerKey, schedule, spin) {
-  this.timerKey = timerKey;
-  this.schedule = schedule;
-  this.spin = spin;
-}
 
+
+// READ DATA FROM FIREBASE
 // Function to read data from Realtime Database
 function readDataFromFirebase() {
-  var database = firebase.database();
-  var dataRef = database.ref('AFFV2/timers');
+  let database = firebase.database();
+  let dataRef = database.ref('AFFV2/timers');
 
   dataRef.on('value', function(snapshot) {
-    var data = snapshot.val();
+    let data = snapshot.val();
 
     if (data !== null && data !== undefined) {
-      // Get the number of children
-      numberOfChildrenAsInt = Object.keys(data).length;
+      
+      numberOfChildrenAsInt = Object.keys(data).length; // Get the number of children
 
-      timersCount = parseInt(numberOfChildrenAsInt, 10);
+      timersCount = parseInt(numberOfChildrenAsInt, 10); // Now you can use numberOfChildrenAsInt as an integer
 
-      console.log(timersCount);
-    // Call a function to update the HTML div with the data
-    displayDataInHtml(data);
-      // Now you can use numberOfChildrenAsInt as an integer
+      console.log("Current Child Node "+ timersCount);
+    
+    displayDataInHtml(data); // Call a function to update the HTML div with the data
+      
     } else {
-      console.log("Data is null or undefined");
+      console.log("Data is empty");
       timersCount = 0;
-      console.log(timersCount);
     }
  
   }, function(error) {
@@ -82,18 +82,18 @@ function readDataFromFirebase() {
 }
 
 
-
+// DELETE FUNCTION
 function deleteDataFromFirebase() {
-  var database = firebase.database();
-  var dataRef = database.ref('AFFV2/timers');
+  let database = firebase.database();
+  let dataRef = database.ref('AFFV2/timers');
 
   // Use limitToLast(1) to get the last item
   dataRef.orderByKey().limitToLast(1).once('value')
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        var lastTimerKey = childSnapshot.key;
+        let lastTimerKey = childSnapshot.key;
 
-        var lastTimerRef = database.ref('AFFV2/timers/' + lastTimerKey);
+        let lastTimerRef = database.ref('AFFV2/timers/' + lastTimerKey);
 
         lastTimerRef.remove()
           .then(function() {
@@ -106,7 +106,7 @@ function deleteDataFromFirebase() {
               if (snapshot.exists()) 
               {
                 console.log("Path exists");
-                console.log("After Deleted"+ timersCount);
+                console.log("Remaining Child Node "+ timersCount);
               } else 
               {
                 document.querySelector("#dataDisplay").innerHTML = "--------NULL---------";
@@ -125,10 +125,12 @@ function deleteDataFromFirebase() {
     });
 }
 
+
+//PROMPT BEFORE DELETING
 function createDeleteHandler() {
   return function() {
 
-    var userResponse = confirm("This will delete the last data entered. Proceed?");
+    let userResponse = confirm("This will delete the last data entered. Proceed?");
     
     if (userResponse) {
  
@@ -140,6 +142,7 @@ function createDeleteHandler() {
 }
 
 
+//CLEAR ALL FUNCTION
 function clearAllTimers() {
   let database = firebase.database();
   let timersRef = database.ref('AFFV2/timers');
@@ -156,9 +159,10 @@ function clearAllTimers() {
 }
 
 
+// CLEAR ALL PROMPT
 // Add an event listener to a button or trigger for clearing all timers
 document.querySelector("#clear").onclick = function () {
-  var userResponse = confirm("Are you sure you want to clear all timers?");
+  let userResponse = confirm("Are you sure you want to clear all timers?");
   
   if (userResponse) {
     clearAllTimers();
@@ -168,32 +172,42 @@ document.querySelector("#clear").onclick = function () {
 };
 
 
+
+// USING CONSTRUCTOR TO CREATE NEW DIV
+// Define a constructor for your data nodes
+function TimerData(timerKey, schedule, spin) {
+  this.timerKey = timerKey;
+  this.schedule = schedule;
+  this.spin = spin;
+}
+
+// ADD DATA TO MY SCHEDULE DYNAMICALLY
 function displayDataInHtml(data) {
-  var dataDisplayDiv = document.getElementById('dataDisplay');
+  let dataDisplayDiv = document.getElementById('dataDisplay');
 
   if (dataDisplayDiv && data) {
 
     dataDisplayDiv.innerHTML = "";
 
   
-    for (var timerKey in data) {
+    for (let timerKey in data) {
       if (data.hasOwnProperty(timerKey)) {
-        var timerData = data[timerKey];
+        let timerData = data[timerKey];
 
    
-        var timerInstance = new TimerData(timerKey, timerData.schedule, timerData.spin);
+        let timerInstance = new TimerData(timerKey, timerData.schedule, timerData.spin);
 
      
-        var timerDiv = document.createElement('div');
+        let timerDiv = document.createElement('div');
         timerDiv.classList.add('timer');
 
  
-        var htmlContent = "<p>Timer: " + timerInstance.timerKey + "</p>";
+        let htmlContent = "<p>Timer: " + timerInstance.timerKey + "</p>";
         htmlContent += "<p>Schedule: " + timerInstance.schedule + "</p>";
 
         if (timerInstance.spin) {
       
-          htmlContent += "<p>Spin Property: " + timerInstance.spin + "</p>";
+          htmlContent += "<p>Spin : " + timerInstance.spin + "</p>";
         }
 
   

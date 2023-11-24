@@ -21,3 +21,5 @@ function toggleDiv(divId) {
   }
 
 
+  // TOGGLE FUNCTION FOR SWITCHING TABS
+
