@@ -69,7 +69,7 @@ function readDataFromFirebase() {
   let database = firebase.database();
   let dataRef = database.ref('AFFV2/timers');
 
-  dataRef.on('value', function(snapshot) {
+  dataRef.once('value', function(snapshot) {
     let data = snapshot.val();
 
     if (data !== null && data !== undefined) {
@@ -90,6 +90,34 @@ function readDataFromFirebase() {
   }, function(error) {
     console.error("Error reading data: " + error.code);
   });
+
+
+
+
+  var distancedata = firebase.database().ref('/distance');
+
+  distancedata.on('value', function(snapshot) {
+   var data = snapshot.val();
+   // Handle the data
+   var formatteddistance = "Remaining : " + data + "%"; // For example, you can add some text to the data
+
+    // Update the <p> element
+    document.getElementById('remainingfood').innerText = formatteddistance;
+});
+
+
+var recentfeeddata = firebase.database().ref('/recentfeed');
+
+recentfeeddata.on('value', function(snapshot) {
+   var recentfeedvalue = snapshot.val();
+   // Handle the data
+   var formattedfeedvalue = "Recent: " + recentfeedvalue + ""; // For example, you can add some text to the data
+
+    // Update the <p> element
+    document.getElementById('recentfeed').innerText = formattedfeedvalue;
+});
+
+
 }
 
 
