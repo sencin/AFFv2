@@ -1,0 +1,434 @@
+@font-face {
+    font-family: valorant;
+    src: url(Font/Valorant.ttf);
+  }
+
+  @font-face {
+    font-family: digital-7;
+    src: url(Font/clock.ttf);
+  }
+
+
+  .ddisplay{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+  }
+.container{
+    width: 50rem;
+    height: 50rem;
+    margin: auto;
+    margin-top: 4rem;
+    text-align: center;
+    border-radius: 30px;
+    border: solid 3px #ffffff;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.toggle {
+    width: 50%;
+    height: 25%;
+    display: none;
+    margin: auto;
+    margin-top: 50px;
+    object-position: center;
+    border: solid 3px #ffffff;
+    border-radius: 6px;
+    background-color: #000000;
+  }
+
+  #btn{
+    visibility: visible;
+  }
+.lbltitle{
+    padding-top: 50px;
+    font-family: valorant ;
+    font-size: 3rem;
+    color: white;
+   }
+
+   .schedule,.feed,.monitor{
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    border-radius: 500px;
+    transition-property: background-color,border-color,color,box-shadow,filter;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    white-space: normal;
+    font-weight: 700;
+    text-align: center;
+    padding: 16px 14px 18px;
+    color: #ffffff;
+    box-shadow: inset 0 0 0 2px #616467;
+    background-color: transparent;
+    height: 48px;
+   }
+
+.schedule:hover{
+    color: #fff;
+    background-color: #616467;
+}
+
+.feed:hover{
+    color: #fff;
+    background-color: #616467;
+}
+
+.monitor:hover{
+  color: #fff;
+  background-color: #616467;
+}
+.csstime , .cssspin{
+    text-align: center;
+}
+
+   
+   * {
+       margin: 0;
+       padding: 0;
+   }
+   body {
+     background-image: url('background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg');
+    font-family: digital-7, sans-serif;
+     display: flex;
+     background-size:cover;
+     flex-direction: column;
+     justify-content: center;
+     background-position:center;
+   }
+   body h1 {
+     font-size: 14px;
+     font-weight: bold;
+     text-align: center;
+     text-transform: uppercase;
+     font-family: sans-serif;
+     padding-bottom: 15px;
+   }
+   body main.clock-display {
+     display: inline-block;
+       text-align: center;
+     padding: 15px 30px;
+     border: solid 2px #ffffff;
+     border-radius: 10px;
+     background-color: #000000;
+     color: #ffffff;
+     box-shadow: 4px 4px 7px 4px rgba(0,0,0,.3);
+     margin-bottom: 30px;
+   }
+   .light-on {
+       color: #ffffff !important;
+   }
+   
+   /* DATE */
+   .date-field {
+       margin: 5px 0;
+     display: flex;
+     justify-content: space-between;
+   }
+   .date-field div {
+       display: inline-block;
+       position: relative;
+   }
+   .date-field div p {
+       font-size: 34px;
+       position: relative;
+       z-index: 100;
+   }
+   .date-field div p.placeholder {
+       color: #2b2828;
+       position: absolute;
+       top: 0;
+       z-index: 50;
+   }
+   .date-field div.day-of-week-mobile {
+     display: none;
+   }
+   .date-field div.day-of-week p {
+     font-size: 50px;
+   }
+   .date-field div p.type {
+     font-size: 10px;
+     font-weight: bold;
+     font-family: sans-serif;
+     text-transform: uppercase;
+   }
+   @media (max-width: 768px) {
+     .date-field {
+       justify-content: space-evenly;
+     }
+     .date-field div.day-of-week {
+       display: none;
+     }
+     .date-field div.day-of-week-mobile {
+       display: inline-block;
+     }
+     .date-field div.day-of-week-mobile p {
+       font-size: 56px;
+       margin-top: -2px;
+     }
+   }
+   @media (max-width:550px) {
+     .date-field div.day-of-week-mobile p {
+       font-size: 50px;
+       margin-top: 0px;
+     }
+   }
+   @media (max-width:468px) {
+     .date-field div.day-of-week-mobile p {
+       font-size: 42px;
+     }
+   }
+   @media (max-width:400px) {
+     .date-field div.day-of-week-mobile p {
+       font-size: 20px;
+     }
+   }
+   
+   /* CLOCK */
+   .clock-field {
+       margin: 5px 0;
+     display: flex;
+     justify-content: center;
+   }
+   .clock-field div {
+       display: inline-block;
+       position: relative;
+   }
+   .clock-field div p {
+       font-size: 100px;
+       position: relative;
+       z-index: 100;
+   }
+   .clock-field .numbers .placeholder {
+       color: #2b2828;
+       position: absolute;
+       top: 0;
+       z-index: 50;
+   }
+   .clock-field .numbers .type {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    margin-top: -10px;
+}
+   .clock-field .am-pm {
+       font-family: sans-serif;
+       text-transform: uppercase;
+       width: 20px;
+   }
+   .clock-field .am-pm div p {
+       font-size: 12px;
+       font-weight: bold;
+       width: 100%;
+   }
+   .clock-field .am,
+   .clock-field .pm {
+       color: #2b2828;
+   }
+   
+   @media (max-width:768px) {
+     main.clock-display {
+       padding: 15px 30px;
+     }
+     .desktop-view {
+       display: none;
+     }
+   }
+   
+   @media (max-width:550px) {
+     .date-field div p {
+       font-size: 30px;
+     }
+     .clock-field div p {
+         font-size: 80px;
+     }
+   }
+   
+   @media (max-width:468px) {
+     .date-field div p {
+       font-size: 24px;
+     }
+     .clock-field div p {
+         font-size: 60px;
+     }
+   }
+   
+   @media (max-width:400px) {
+     .date-field div p {
+       font-size: 20px;
+     }
+     .days .day p,
+     .clock-field .am-pm div p {
+       font-size: 10px;
+     }
+     .clock-field div p {
+         font-size: 50px;
+     }
+   }
+   
+   @media (max-width:350px) {
+     .date-field div p {
+       font-size: 20px;
+     }
+     .clock-field div p {
+         font-size: 43px;
+     }
+   }
+   
+   @media (max-width:320px) {
+     .clock-field div p {
+         font-size: 40px;
+     }
+   }
+   
+
+.cssspin,.csstime{
+    
+    border: 3px solid #000;
+    border-radius: 5px;
+    height: 50px;
+    line-height: normal;
+    color: #282828;
+    font-family: 'Courier New', Courier, monospace;
+    width: 50%;
+    box-sizing: border-box;
+    user-select: auto;
+    font-size: 16px;
+   
+}
+
+.csssave, .cssback{
+
+    outline: 0;
+    color: white;
+    grid-gap: 8px;
+    align-items: center;
+    background: 0 0;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 16px;
+    gap: 8px;
+    justify-content: center;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 5px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all .14s ease-out;
+    white-space: nowrap;
+}
+   
+.cssback:hover {
+    box-shadow: 4px 4px 0 #ffffff;
+    transform: translate(-4px,-4px);
+}
+.cssback:focus-visible{
+    outline-offset: 1px;
+}
+.csssave:hover {
+    box-shadow: 4px 4px 0 #ffffff;
+    transform: translate(-4px,-4px);
+}
+.csssave:focus-visible{
+    outline-offset: 1px;
+}
+
+.timer {
+  border: 2px solid #ffffff;
+  display: inline-block;
+  margin: 5px 15px;
+}
+.txt{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  
+  .cssspin,.csstime{
+    justify-content: center;
+  }
+  .txt{
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .toggle {
+    width: 90%;
+    height: 30%;
+    display: none;
+    margin: auto;
+    margin-top: 50px;
+    object-position: center;
+    border: solid 3px #ffffff;
+    border-radius: 6px;
+    background-color: #000000;
+  }
+  
+   * {
+       margin: 0;
+       padding: 0;
+   }
+
+  .date-field div p.type {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+
+  .clock-field .numbers .type {
+    font-size: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+  
+
+.lbltitle {
+  padding-top: 50px;
+  font-family: valorant;
+  font-size: 2rem;
+  color: white;
+}
+
+.container{
+  height: 50rem;
+  margin: auto;
+  text-align: center;
+  border-radius: 30px;
+  border: solid 3px #ffffff;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+body {
+    background-image: url(background/koi-fish-dark-byrotek-1850429-wallhere.com.jpg);
+    font-family: digital-7, sans-serif;
+    display: flex;
+    background-size: cover;
+    flex-direction: row;
+    justify-content: center;
+    background-position: center;
+}
+
+
+
+
+
+}
