@@ -15,4 +15,8 @@ Added Read and Write function Using Firebase database
 
 * used OOP 
 
+* added features using battery sensor.
+
+* Added Recent Feed History
+
 
