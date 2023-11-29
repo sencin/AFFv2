@@ -365,15 +365,15 @@
 
   .toggle {
     width: 90%;
-    height: 30%;
     display: none;
     margin: auto;
+    padding-top: 30px;
     margin-top: 50px;
     object-position: center;
     border: solid 3px #ffffff;
     border-radius: 6px;
     background-color: #000000;
-  }
+}
   
    * {
        margin: 0;
