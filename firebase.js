@@ -118,6 +118,17 @@ recentfeeddata.on('value', function(snapshot) {
 });
 
 
+
+var batterypercent = firebase.database().ref('/battery');
+
+batterypercent.on('value', function(snapshot) {
+   var batterypercent = snapshot.val();
+   // Handle the data
+   var batterypercentformat = "Battery: " + batterypercent + "%"; // For example, you can add some text to the data
+
+    // Update the <p> element
+    document.getElementById('batper').innerText = batterypercentformat;
+});
 }
 
 
