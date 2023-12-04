@@ -54,12 +54,24 @@ document.querySelector("#inputsave").onclick = function () {
 
 // MANUAL FEEDING FUNCTION
 document.querySelector("#feedbtn").onclick = function () {
-    firebase.database().ref().update({
-      feednow: 1 
-  });
-  alert("Thank You for The Food");
+  
+    let userResponse = confirm("Are you Sure to Feed The Fish?");
+    
+    if (userResponse) {
+ 
+      firebase.database().ref().update({
+        feednow: 1 
+    });
+    alert("Thank You for The Food");
+    } else {
+
+    }
+
 };
 
+function createDeleteHandler() {
+  
+}
 
 
 
