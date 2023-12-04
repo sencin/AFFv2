@@ -74,8 +74,11 @@
     color: #fff;
     background-color: #616467;
 }
+.about{
+  margin-top: 20rem;
+}
 .aboutbtn{
-  margin: 10px 0px;
+  
   text-align: center;
 }
 .feed:hover{
