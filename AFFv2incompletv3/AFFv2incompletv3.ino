@@ -12,9 +12,6 @@ Servo servo;
 #define WIFI_SSID "5"
 #define WIFI_PASSWORD "150169226"
 
-
-
-
 WiFiUDP ntpUDP;
 
 NTPClient timeClient(ntpUDP, "asia.pool.ntp.org",28800);
@@ -25,6 +22,11 @@ const int echoPin = D2;  //D3
 long duration;
 int distance;
 
+int analogInPin  = A0;  
+int sensorValue; 
+float voltage;
+float bat_percentage;
+
 FirebaseData timer,feed, fbdo;
 String timerPath;
 String schedule;
@@ -33,9 +35,6 @@ String schedules[]={"00:00","00:00","00:00"} ;
 int spins[]{0,0,0};
 String currentTime;
 int i,feednow=0;
-
-
-
 
 void setup() 
 {
@@ -61,18 +60,19 @@ void setup()
 }
 
 void loop() {
-
+  readbattery();
   digitalWrite(LED_BUILTIN, HIGH);
   timeClient.update();
-
+  
   int hours = timeClient.getHours();
   int minutes = timeClient.getMinutes();
   //get time and hours`
+
+
   currentTime = (hours < 10 ? "0" : "") + String(hours) + ":" + (minutes < 10 ? "0" : "") + String(minutes);
   
   Firebase.getInt(feed,"feednow");
   feednow = feed.to<int>();
-  ultrasonic();
 
   if (feednow==1) // Direct Feeding
   {
@@ -84,8 +84,9 @@ void loop() {
       Serial.println("Fed");
       delay(900); 
       servo.write(0); // stop rotation
-
       recentfeed();
+      ultrasonic();
+
   }
    
 else
@@ -134,6 +135,7 @@ else
             Serial.println("Delay1 minute");
             //delay 1 minute
             recentfeed();
+            ultrasonic();
             delay(60000);     
             }  
         }
@@ -184,4 +186,35 @@ Serial.println("RecentFeed : " + currentTime);
 Firebase.setString(firebaserecentfeed, "/recentfeed", currentTime);
 }
 
+
+
+void readbattery(){
+ FirebaseData readbat;
+ sensorValue = analogRead(analogInPin);
+  voltage = (((sensorValue * 3.3) / 1024) * 2 ); 
+  bat_percentage = mapfloat(voltage, 2.8, 4.2, 0, 100); 
+ 
+  if (bat_percentage >= 100)
+  {
+    bat_percentage = 100;
+  }
+  if (bat_percentage <= 0)
+  {
+    bat_percentage = 1;
+  }
+ 
+  Serial.print("Analog Value = ");
+  Serial.print(sensorValue);
+  Serial.print("\t Output Voltage = ");
+  Serial.print(voltage);
+  Serial.print("\t Battery Percentage = ");
+  Serial.println(bat_percentage);
+  String batPercentageStr = String(bat_percentage);
+  Firebase.setString(readbat,"/battery", batPercentageStr);
+}
+
+float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
