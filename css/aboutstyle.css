@@ -1,0 +1,103 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('background.jpg'); /* Replace with the path to your background image */
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional, makes the background fixed */
+}
+
+header {
+    background-color: #333;
+    color: rgb(17, 161, 187);
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.member {
+    background-color: rgba(135, 206, 235, 0.5); /* Light blue and semi-transparent */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    transition: padding 0.3s ease, background-color 0.3s ease; /* Add a smooth transition effect for padding and background-color */
+    border-radius: 15px;
+}
+
+/* Add padding when hovered */
+.member:hover {
+    padding: 30px; /* Adjust the padding size as needed */
+    background-color: rgba(135, 207, 235, 0.235); /* Slightly more transparent when hovering */
+    cursor: pointer; /* Change the cursor to indicate it's clickable */
+}
+
+img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: rgb(0, 60, 112);
+}
+
+p {
+    font-size: 1.5rem;
+    color: #000000;
+    background-color: aqua;
+    border-radius: 15px;
+}
+.container:hover {
+    padding: 20px; /* Adjust the padding size as needed */
+    transition: padding 0.3s ease;
+}
+
+/* Add a padding when clicked */
+.container:active {
+    padding: 20px; /* Adjust the padding size as needed */
+    transition: padding 0.3s ease;
+}
+.button-container {
+    position: fixed;
+    left: 20px; /* Adjust the left position as needed */
+    bottom: -60px; /* Hide the button initially below the viewport */
+    display: flex;
+    justify-content: flex-start; /* Align the button to the left */
+    align-items: center;
+    padding: 20px;
+    transition: bottom 0.3s ease; /* Add a smooth transition effect for the bottom position */
+}
+
+.transparent-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.transparent-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}

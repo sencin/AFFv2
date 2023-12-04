@@ -47,7 +47,7 @@
     color: white;
    }
 
-   .schedule,.feed,.monitor{
+   .schedule,.feed,.monitor,.about{
     display: inline-block;
     outline: none;
     cursor: pointer;
@@ -74,7 +74,10 @@
     color: #fff;
     background-color: #616467;
 }
-
+.aboutbtn{
+  margin: 10px 0px;
+  text-align: center;
+}
 .feed:hover{
     color: #fff;
     background-color: #616467;
