@@ -44,8 +44,9 @@ document.querySelector("#inputsave").onclick = function () {
       spin: spintimes
     });
 
-    alert("Data Inserted");
+    
     readDataFromFirebase();
+    alert("Data Inserted");
   } else {
     alert("Please enter a valid spin value (1 to 10).");
     // You may choose to handle this case in a way that fits your application
