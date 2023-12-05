@@ -67,7 +67,7 @@ h2 {
 p {
     font-size: 1.5rem;
     color: #000000;
-    background-color: aqua;
+    background-color: transparent;
     border-radius: 15px;
 }
 .container:hover {
