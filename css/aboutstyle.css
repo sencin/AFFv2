@@ -93,7 +93,7 @@ p {
 
 .transparent-button {
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: transparent;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
