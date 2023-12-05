@@ -87,24 +87,27 @@ document.addEventListener('DOMContentLoaded', function () {
             var password = document.querySelector("#password").value;
         
             // Loop through each child in /accounts/admin and check credentials
+            var adminFound = false;
+
+            // Loop through each child in /accounts/admin and check credentials
             accountsRef.once('value')
               .then(function(snapshot) {
                 snapshot.forEach(function(childSnapshot) {
                   var data = childSnapshot.val();
                   if (data && data.username === username && data.password === password) {
                     console.log('Credentials match!');
-                    alert('Credentials match!');
+                    adminFound = true;
                     window.location.href = './main.htm';
-
-                  } else {
-                    console.log('Credentials do not match.');
                   }
                 });
+        
+                // Check if any admin credentials are found
+                if (!adminFound) {
+                  alert('No data credentials found');
+                }
               })
               .catch(function(error) {
                 console.error('Error reading from database:', error);
               });
+          }
         
-        };
-
-
