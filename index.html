@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./login.css">
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+    
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button id="loginbtn" type="submit">Login</button>
+            </div>
+            <button class="" id="openModalBtn">Create Account</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+           <input type="password" placeholder="ENTER AUTH TOKEN" id="authtoken"/>
+            <p>To Proceed Click Confirm</p>
+            <button id="yesBtn">Confirm</button>
+            <button id="noBtn">Cancel</button>
+        </div>
+    </div>
+    </div>
+    <script src="./login.js"></script>
+</body>
+</html>

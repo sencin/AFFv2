@@ -69,12 +69,6 @@ document.querySelector("#feedbtn").onclick = function () {
 
 };
 
-function createDeleteHandler() {
-  
-}
-
-
-
 // READ DATA FROM FIREBASE
 // Function to read data from Realtime Database
 function readDataFromFirebase() {
