@@ -49,6 +49,10 @@ main {
     cursor: pointer; /* Change the cursor to indicate it's clickable */
 }
 
+a{
+    text-decoration: none;
+    color: #000000;
+}
 img {
     max-width: 100%;
     border-radius: 50%;
