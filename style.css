@@ -381,6 +381,8 @@
 
 @media only screen and (max-width: 767px) {
   
+
+
   .cssspin,.csstime{
     justify-content: center;
   }
@@ -431,11 +433,11 @@
 }
 
 .container{
-  height: 50rem;
+  height: 53.5rem;
   margin: auto;
+  border: solid 3px transparent;
   text-align: center;
   border-radius: 30px;
-  border: solid 3px #ffffff;
   border-radius: 6px;
   background-color: rgba(0, 0, 0, 0.5);
 }

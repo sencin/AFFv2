@@ -59,7 +59,7 @@ document.querySelector("#feedbtn").onclick = function () {
     let userResponse = confirm("Are you Sure to Feed The Fish?");
     
     if (userResponse) {
- 
+      
       firebase.database().ref().update({
         feednow: 1 
     });
