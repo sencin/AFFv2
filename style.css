@@ -34,7 +34,9 @@
     object-position: center;
     border: solid 3px #ffffff;
     border-radius: 6px;
-    background-color: #000000;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+
   }
 
   #btn{
@@ -399,7 +401,8 @@
     object-position: center;
     border: solid 3px #ffffff;
     border-radius: 6px;
-    background-color: #000000;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
 }
   
    * {
