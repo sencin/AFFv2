@@ -33,37 +33,43 @@ String schedule;
 String spin;
 String schedules[]={"00:00","00:00","00:00"} ;
 int spins[]{0,0,0};
+
 String currentTime;
+
 int i,feednow=0;
 
 void setup() 
 {
+  servo.attach(D3, 500, 2400); 
+  servo.write(0);
+  timeClient.begin();
+  pinMode(trigPin, OUTPUT); 
+  pinMode(echoPin, INPUT); 
   pinMode(LED_BUILTIN, OUTPUT);
+
   Serial.begin(9600);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Connecting to a");
+
   while (WiFi.status() != WL_CONNECTED) 
   {
     Serial.print(".");
-    delay(500);
+    delay(200);
   }
+
   Serial.println();
   Serial.print("connected: ");
   Serial.println(WiFi.localIP());   
-  timeClient.begin();
+  
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
   Firebase.reconnectWiFi(true);
-  servo.attach(D3, 500, 2400); // Pin attached to D3oi3579
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 void loop() {
   readbattery();
-  digitalWrite(LED_BUILTIN, HIGH);
   timeClient.update();
-  
+  digitalWrite(LED_BUILTIN, HIGH);
   int hours = timeClient.getHours();
   int minutes = timeClient.getMinutes();
   //get time and hours`
@@ -129,7 +135,7 @@ else
                 servo.write(0); // rotate clockwise
                 delay(900); // allow to rotate for n micro seconds, you can change this to your need
                 servo.write(180); // stop rotation
-                Serial.println("Feeding" + j);
+                Serial.println("Feeding");
                 delay(900);      
               }
             Serial.println("Delay1 minute");
