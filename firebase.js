@@ -28,6 +28,27 @@ document.querySelector("#inputsave").onclick = function () {
   scheduletime = document.querySelector("#inputtime").value;
   spintimes = document.querySelector("#inputspin").value;
 
+
+//
+  var inputTime = document.getElementById("inputtime").value;
+
+  // Split the input time into hours and minutes
+  var timeParts = inputTime.split(":");
+  var hours = parseInt(timeParts[0]);
+  var minutes = timeParts[1];
+
+  // Convert to 12-hour format
+  var period = (hours >= 12) ? "PM" : "AM";
+  hours = (hours % 12) || 12; // Handle midnight (00:00) as 12 AM
+
+  // Format the result
+  var convertedTime = hours + ":" + minutes + " " + period;
+//
+
+
+
+
+  
   // Check if either scheduletime or spintimes is empty
   if (scheduletime.trim() === "" || spintimes.trim() === "") {
     alert("Please enter both a valid schedule time and spin value (spin value should be 1-10).");
@@ -41,10 +62,12 @@ document.querySelector("#inputsave").onclick = function () {
     timersCount++;
     firebase.database().ref(timerPath).set({
       schedule: scheduletime,
-      spin: spintimes
+      spin: spintimes,
+      convertedtime : convertedTime
     });
 
-    
+  
+
     readDataFromFirebase();
     alert("Data Inserted");
   } else {
@@ -52,6 +75,13 @@ document.querySelector("#inputsave").onclick = function () {
     // You may choose to handle this case in a way that fits your application
   }
 };
+
+
+
+
+
+
+
 
 // MANUAL FEEDING FUNCTION
 document.querySelector("#feedbtn").onclick = function () {
@@ -69,6 +99,21 @@ document.querySelector("#feedbtn").onclick = function () {
     }
 
 };
+
+
+
+function convertTime() {
+  // Get the input value
+  
+
+  // Display the result
+  document.getElementById("inputtime").innerText = "Converted Time: " + convertedTime;
+}
+
+
+
+
+
 
 // READ DATA FROM FIREBASE
 // Function to read data from Realtime Database
@@ -106,7 +151,7 @@ function readDataFromFirebase() {
   distancedata.on('value', function(snapshot) {
    var data = snapshot.val();
    // Handle the data
-   var formatteddistance = "Remaining : " + data + "%"; // For example, you can add some text to the data
+   var formatteddistance = "Remaining : " + data + ""; // For example, you can add some text to the data
 
     // Update the <p> element
     document.getElementById('remainingfood').innerText = formatteddistance;
@@ -131,7 +176,7 @@ var batterypercent = firebase.database().ref('/battery');
 batterypercent.on('value', function(snapshot) {
    var batterypercent = snapshot.val();
    // Handle the data
-   var batterypercentformat = "Battery: " + batterypercent + "%"; // For example, you can add some text to the data
+   var batterypercentformat = "Battery: " + batterypercent + ""; // For example, you can add some text to the data
 
     // Update the <p> element
     document.getElementById('batper').innerText = batterypercentformat;
@@ -232,9 +277,9 @@ document.querySelector("#clear").onclick = function () {
 
 // USING CONSTRUCTOR TO CREATE NEW DIV
 // Define a constructor for your data nodes
-function TimerData(timerKey, schedule, spin) {
+function TimerData(timerKey, convertedtime, spin) {
   this.timerKey = timerKey;
-  this.schedule = schedule;
+  this.convertedtime = convertedtime;
   this.spin = spin;
 }
 
@@ -252,7 +297,7 @@ function displayDataInHtml(data) {
         let timerData = data[timerKey];
 
    
-        let timerInstance = new TimerData(timerKey, timerData.schedule, timerData.spin);
+        let timerInstance = new TimerData(timerKey, timerData.convertedtime, timerData.spin);
 
      
         let timerDiv = document.createElement('div');
@@ -260,7 +305,7 @@ function displayDataInHtml(data) {
 
  
         let htmlContent = "<p>Timer: " + timerInstance.timerKey + "</p>";
-        htmlContent += "<p>Schedule: " + timerInstance.schedule + "</p>";
+        htmlContent += "<p>Schedule: " + timerInstance.convertedtime + "</p>";
 
         if (timerInstance.spin) {
       
@@ -278,3 +323,5 @@ function displayDataInHtml(data) {
     }
   }
 }
+
+

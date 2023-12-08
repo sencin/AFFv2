@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12-Hour Time Format</title>
+  <script>
+    function updateTimeFormat() {
+      const timeInput = document.getElementById('timeInput');
+      const enteredTime = timeInput.value;
+
+      // Parse the entered time and format it in 12-hour format
+      const parsedTime = new Date(`2000-01-01T${enteredTime}`);
+      const formattedTime = parsedTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+
+      // Update the input value with the formatted time
+      timeInput.value = formattedTime;
+      alert(formattedTime);
+      alert(enteredTime);
+    }
+  </script>
+</head>
+<body>
+
+<label for="timeInput">Select a time (12-hour format):</label>
+<input type="time" id="timeInput" name="timeInput" step="60" onchange="updateTimeFormat()">
+
+</body>
+</html>
