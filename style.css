@@ -27,7 +27,7 @@
 
 .toggle {
     width: 50%;
-    height: 25%;
+    height: 30%;
     display: none;
     margin: auto;
     margin-top: 50px;
@@ -394,7 +394,6 @@
 
   .toggle {
     width: 90%;
-    height: 35%;
     display: none;
     margin: auto;
     padding-top: 30px;
