@@ -394,6 +394,7 @@
 
   .toggle {
     width: 90%;
+    height: 30%;
     display: none;
     margin: auto;
     padding-top: 30px;
