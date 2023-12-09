@@ -20,19 +20,17 @@
     margin-top: 4rem;
     text-align: center;
     border-radius: 30px;
-    border: solid 3px #ffffff;
-  border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.5);
+  
+  background-color: rgba(0, 0, 0, 0.0);
 }
 
 .toggle {
     width: 50%;
-    height: 30%;
     display: none;
     margin: auto;
     margin-top: 50px;
     object-position: center;
-    border: solid 3px #ffffff;
+    border: solid 2px #616467;
     border-radius: 6px;
     background-color: transparent;
     backdrop-filter: blur(10px);
@@ -367,6 +365,7 @@
     text-overflow: ellipsis;
     transition: all .14s ease-out;
     white-space: nowrap;
+    margin-bottom: 20px;
 }
    
 .cssback:hover {
@@ -409,7 +408,7 @@
     margin-top: 50px;
   }
   .status .innerdiv{
-    margin: 35px;
+    margin: 13px;
    }
   .txt{
     font-family: 'Courier New', Courier, monospace;
@@ -422,7 +421,7 @@
 
     margin-top: 50px;
     object-position: center;
-    border: solid 3px #ffffff;
+    border: solid 3px #616467;
     border-radius: 6px;
     background-color: transparent;
     backdrop-filter: blur(10px);
@@ -468,6 +467,9 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.container{
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 
 body {
