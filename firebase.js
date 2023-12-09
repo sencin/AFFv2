@@ -139,7 +139,7 @@ function readDataFromFirebase() {
   distancedata.on('value', function(snapshot) {
    var data = snapshot.val();
    // Handle the data
-   var formatteddistance = "Remaining : " + data + ""; // For example, you can add some text to the data
+   var formatteddistance =  data + ""; // For example, you can add some text to the data
 
     // Update the <p> element
     document.getElementById('remainingfood').innerText = formatteddistance;
