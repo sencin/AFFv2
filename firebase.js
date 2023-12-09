@@ -221,6 +221,7 @@ function deleteDataFromFirebase() {
             console.error("Error removing last data: " + error.message);
           });
       });
+      readDataFromFirebase();
     })
     .catch(function(error) {
       console.error("Error getting last data: " + error.message);
