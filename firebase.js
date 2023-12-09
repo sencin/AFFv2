@@ -110,11 +110,6 @@ function convertTime() {
   document.getElementById("inputtime").innerText = "Converted Time: " + convertedTime;
 }
 
-
-
-
-
-
 // READ DATA FROM FIREBASE
 // Function to read data from Realtime Database
 function readDataFromFirebase() {
