@@ -58,7 +58,7 @@ document.querySelector("#inputsave").onclick = function () {
     timersCount++;
     firebase.database().ref(timerPath).set({
       schedule: scheduletime,
-      spin: spintimes,
+      spin: parseInt(spintimes),
       convertedtime : convertedTime
     });
 
@@ -111,12 +111,20 @@ function readDataFromFirebase() {
       timersCount = parseInt(numberOfChildrenAsInt, 10); // Now you can use numberOfChildrenAsInt as an integer
 
       console.log("Current Child Node "+ timersCount);
+      firebase.database().ref().update({
+        node: timersCount
+    });
+
     
     displayDataInHtml(data); // Call a function to update the HTML div with the data
       
     } else {
       console.log("Data is empty");
       timersCount = 0;
+      firebase.database().ref().update({
+        node: timersCount
+    });
+     
     }
  
   }, function(error) {
@@ -235,6 +243,7 @@ function clearAllTimers() {
       console.log("All timers cleared successfully!");
       document.querySelector("#dataDisplay").innerHTML = "--------NULL---------";
       timersCount = 0;
+      readDataFromFirebase();
     })
     .catch(function(error) {
       console.error("Error clearing timers: " + error.message);
