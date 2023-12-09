@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Data Display</title>
+  <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <style>
+     
+    body {
+       justify-content: center;
+       align-items: center;
+      background-color: black;
+      color: #00ff00; /* Green text */
+      font-family: monospace;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #output {
+      margin-left: 5rem;
+      margin-top: 2rem;
+      white-space: pre;
+      overflow-y: scroll;
+      height: 100vh;
+      
+      
+    }
+
+    #output::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #output::-webkit-scrollbar-thumb {
+      background-color: #00ff00; /* Green scrollbar */
+    }
+
+    #output::-webkit-scrollbar-track {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+
+  <script>
+    // Replace with your Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyC0WToORO9UG83T1MlsudbVripZ7FdGli0",
+    authDomain: "frenzy-ecfc7.firebaseapp.com",
+    databaseURL: "https://frenzy-ecfc7-default-rtdb.firebaseio.com",
+    projectId: "frenzy-ecfc7",
+    storageBucket: "frenzy-ecfc7.appspot.com",
+    messagingSenderId: "783829962407",
+    appId: "1:783829962407:web:35b6506ef000dd682fd582"
+   };
+
+   firebase.initializeApp(firebaseConfig);
+
+// Reference to your Realtime Database
+const database = firebase.database();
+
+// Reference to your database node
+const dataRef = database.ref('/');
+
+// Function to fetch and display data
+function fetchData() {
+  dataRef.on('value', snapshot => {
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = ''; // Clear previous data
+
+    snapshot.forEach(childSnapshot => {
+      const data = childSnapshot.val();
+      // Display data in the console-like format
+      outputDiv.innerHTML += `${JSON.stringify(data, null, 2)}\n\n`;
+    });
+  });
+}
+
+// Fetch data on page load
+fetchData();
+  </script>
+</body>
+</html
