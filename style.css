@@ -330,6 +330,20 @@
     font-size: 16px;
    
 }
+.csstime{
+  margin-top: 50px;
+}
+
+.cssspin{
+  margin-bottom: 20px;
+}
+
+.status{
+   color: white;
+   font-family: 'Courier New', 
+   Courier, monospace;
+}
+
 
 .csssave, .cssback{
 
@@ -378,7 +392,9 @@
 .txt{
   font-family: 'Courier New', Courier, monospace;
 }
-
+.status .innerdiv{
+  margin: 30px;
+ }
 
 
 @media only screen and (max-width: 767px) {
@@ -387,7 +403,14 @@
 
   .cssspin,.csstime{
     justify-content: center;
+
   }
+  .csstime{
+    margin-top: 50px;
+  }
+  .status .innerdiv{
+    margin: 35px;
+   }
   .txt{
     font-family: 'Courier New', Courier, monospace;
   }
@@ -396,7 +419,7 @@
     width: 90%;
     display: none;
     margin: auto;
-    padding-top: 30px;
+
     margin-top: 50px;
     object-position: center;
     border: solid 3px #ffffff;
