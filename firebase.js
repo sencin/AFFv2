@@ -44,11 +44,7 @@ document.querySelector("#inputsave").onclick = function () {
   // Format the result
   var convertedTime = hours + ":" + minutes + " " + period;
 //
-
-
-
-
-  
+ 
   // Check if either scheduletime or spintimes is empty
   if (scheduletime.trim() === "" || spintimes.trim() === "") {
     alert("Please enter both a valid schedule time and spin value (spin value should be 1-10).");
@@ -65,8 +61,6 @@ document.querySelector("#inputsave").onclick = function () {
       spin: spintimes,
       convertedtime : convertedTime
     });
-
-  
 
     readDataFromFirebase();
     alert("Data Inserted");
@@ -100,15 +94,6 @@ document.querySelector("#feedbtn").onclick = function () {
 
 };
 
-
-
-function convertTime() {
-  // Get the input value
-  
-
-  // Display the result
-  document.getElementById("inputtime").innerText = "Converted Time: " + convertedTime;
-}
 
 // READ DATA FROM FIREBASE
 // Function to read data from Realtime Database
@@ -254,6 +239,8 @@ function clearAllTimers() {
     .catch(function(error) {
       console.error("Error clearing timers: " + error.message);
     });
+    
+
 }
 
 
@@ -263,6 +250,7 @@ document.querySelector("#clear").onclick = function () {
   let userResponse = confirm("Are you sure you want to clear all timers?");
   
   if (userResponse) {
+    
     clearAllTimers();
   } else {
     // User canceled the operation
