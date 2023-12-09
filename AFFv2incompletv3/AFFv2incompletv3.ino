@@ -6,18 +6,17 @@
 #include <Servo.h>
 
 Servo servo;
+WiFiUDP ntpUDP;
 
 #define FIREBASE_HOST "frenzy-ecfc7-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "NvEgms7TtDDn0cliU7HsbktRPngvZd8yBFglhj6x"
-#define WIFI_SSID "5"
-#define WIFI_PASSWORD "150169226"
-
-WiFiUDP ntpUDP;
-
 NTPClient timeClient(ntpUDP, "asia.pool.ntp.org",28800);
 
-const int trigPin = D1;  //D4
-const int echoPin = D2;  //D3
+const String ssid = "5";
+const String password = "150169226";
+
+const int trigPin = D1;  //D1
+const int echoPin = D2;  //D2
 
 long duration;
 int distance;
@@ -28,46 +27,40 @@ float voltage;
 float bat_percentage;
 
 FirebaseData timer,feed, fbdo;
-String timerPath;
-String schedule;
-String spin;
-String schedules[]={"00:00","00:00","00:00"} ;
-int spins[]{0,0,0};
-String currentTime;
-int i,feednow=0;
+String timerPath, schedule, spin, currentTime;
+
+String schedules[]={"00:00","00:00","00:00","00:00","00:00","00:00"} ;
+
+int spins[]{0,0,0,0,0,0};
+
+int feednow=0;
 
 void setup() 
 {
-  pinMode(LED_BUILTIN, OUTPUT);
-  Serial.begin(9600);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Connecting to a");
-  while (WiFi.status() != WL_CONNECTED) 
-  {
-    Serial.print(".");
-    delay(500);
-  }
-  Serial.println();
-  Serial.print("connected: ");
-  Serial.println(WiFi.localIP());   
+  servo.attach(D3, 500, 2400); 
+  servo.write(0);
   timeClient.begin();
+  pinMode(trigPin, OUTPUT); 
+  pinMode(echoPin, INPUT); 
+  Serial.begin(9600);
+  connectToWiFi();
+  Serial.println();   
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
-  servo.attach(D3, 500, 2400); // Pin attached to D3oi3579
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  
+ 
 }
 
 void loop() {
   readbattery();
-  digitalWrite(LED_BUILTIN, HIGH);
+
+   if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Connection lost. Reconnecting...");
+    connectToWiFi();
+  }
   timeClient.update();
-  
+  digitalWrite(LED_BUILTIN, HIGH);
   int hours = timeClient.getHours();
   int minutes = timeClient.getMinutes();
   //get time and hours`
-
 
   currentTime = (hours < 10 ? "0" : "") + String(hours) + ":" + (minutes < 10 ? "0" : "") + String(minutes);
   
@@ -86,7 +79,6 @@ void loop() {
       servo.write(0); // stop rotation
       recentfeed();
       ultrasonic();
-
   }
    
 else
@@ -101,35 +93,31 @@ else
       else
       {  
         Serial.println("Database does Exist:");
-        for (int i = 0; i < 3; i++) 
+        for (int i = 0; i < 5; i++) 
         {
-          //time update in reaktime comminication
+          //time update in realtime comminication
           timeClient.update();
           currentTime = (hours < 10 ? "0" : "") + String(hours) + ":" + (minutes < 10 ? "0" : "") + String(minutes);
           timerPath = "/AFFV2/timers/timer" + String(i);   
-
           // Retrieve schedule value
           Firebase.getString(fbdo, timerPath + "/schedule");
           schedule = fbdo.to<String>();
           schedules[i] = schedule;  
-         
           // Retrieve spin value
           Firebase.getInt(fbdo, timerPath + "/spin");
           spin = fbdo.to<String>();
           spins[i] = spin.toInt();
+          Serial.println("Current Time : " + currentTime);
+          Serial.println("Schedule:" +schedules[i] );
 
           if(schedules[i] == currentTime)
             {
-            int spininput=0;
-            
-            Serial.println("Schedule:" +schedules[i] );
-            spininput=i;
-              for(int j = 0; j< spins[spininput] ; j++)
+              for(int j = 0; j< spins[i] ; j++)
               {
                 servo.write(0); // rotate clockwise
                 delay(900); // allow to rotate for n micro seconds, you can change this to your need
                 servo.write(180); // stop rotation
-                Serial.println("Feeding" + j);
+                Serial.println("Feeding");
                 delay(900);      
               }
             Serial.println("Delay1 minute");
@@ -149,72 +137,92 @@ else
 
 }
 
-
 void ultrasonic(){
-FirebaseData firebaseDataUltrasonic;
+      FirebaseData firebaseDataUltrasonic;
 
-digitalWrite(trigPin, LOW);
-delayMicroseconds(2);
+      digitalWrite(trigPin, LOW);
+      delayMicroseconds(2);
 
-// Sets the trigPin on HIGH state for 10 micro seconds
-digitalWrite(trigPin, HIGH);
-delayMicroseconds(10);
+      // Sets the trigPin on HIGH state for 10 micro seconds
+      digitalWrite(trigPin, HIGH);
+      delayMicroseconds(10);
 
-digitalWrite(trigPin, LOW);
+      digitalWrite(trigPin, LOW);
 
-// Reads the echoPin, returns the sound wave travel time in microseconds
-duration = pulseIn(echoPin, HIGH);
+      // Reads the echoPin, returns the sound wave travel time in microseconds
+      duration = pulseIn(echoPin, HIGH);
 
-// Calculating the distance
-distance= duration*0.034/2;
-// Prints the distance on the Serial Monitor
-Serial.print("Distance: ");
-Serial.println(distance);
+      // Calculating the distance
+      distance= duration*0.034/2;
+      // Prints the distance on the Serial Monitor
+      Serial.print("Distance: ");
+      Serial.println(distance);
 
-Firebase.setInt(firebaseDataUltrasonic, "/distance", distance);
+      Firebase.setInt(firebaseDataUltrasonic, "/distance", distance);
 }
 
 
 
 void recentfeed(){
-timeClient.update();
-int hours = timeClient.getHours();
-int minutes = timeClient.getMinutes();
-FirebaseData firebaserecentfeed;
-currentTime = (hours < 10 ? "0" : "") + String(hours) + ":" + (minutes < 10 ? "0" : "") + String(minutes);
-Serial.println("RecentFeed : " + currentTime);
-Firebase.setString(firebaserecentfeed, "/recentfeed", currentTime);
+      timeClient.update();
+      int hours = timeClient.getHours();
+      int minutes = timeClient.getMinutes();
+      FirebaseData firebaserecentfeed;
+      currentTime = (hours < 10 ? "0" : "") + String(hours) + ":" + (minutes < 10 ? "0" : "") + String(minutes);
+      Serial.println("RecentFeed : " + currentTime);
+      Firebase.setString(firebaserecentfeed, "/recentfeed", currentTime);
 }
 
 
-
 void readbattery(){
- FirebaseData readbat;
- sensorValue = analogRead(analogInPin);
-  voltage = (((sensorValue * 3.3) / 1024) * 2 ); 
-  bat_percentage = mapfloat(voltage, 2.8, 4.2, 0, 100); 
- 
-  if (bat_percentage >= 100)
-  {
-    bat_percentage = 100;
-  }
-  if (bat_percentage <= 0)
-  {
-    bat_percentage = 1;
-  }
- 
-  Serial.print("Analog Value = ");
-  Serial.print(sensorValue);
-  Serial.print("\t Output Voltage = ");
-  Serial.print(voltage);
-  Serial.print("\t Battery Percentage = ");
-  Serial.println(bat_percentage);
-  String batPercentageStr = String(bat_percentage);
-  Firebase.setString(readbat,"/battery", batPercentageStr);
+      FirebaseData readbat;
+      sensorValue = analogRead(analogInPin);
+        voltage = (((sensorValue * 3.3) / 1024) * 2 ); 
+        bat_percentage = mapfloat(voltage, 2.8, 4.2, 0, 100); 
+      
+        if (bat_percentage >= 100)
+        {
+          bat_percentage = 100;
+        }
+        if (bat_percentage <= 0)
+        {
+          bat_percentage = 1;
+        }
+      
+        Serial.print("Analog Value = ");
+        Serial.print(sensorValue);
+        Serial.print("\t Output Voltage = ");
+        Serial.print(voltage);
+        Serial.print("\t Battery Percentage = ");
+        Serial.println(bat_percentage);
+        String batPercentageStr = String(bat_percentage);
+        Firebase.setString(readbat,"/battery", batPercentageStr);
 }
 
 float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
 {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+      return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+
+void connectToWiFi() 
+{
+  Serial.println("Connecting to WiFi...");
+
+  // Attempt to connect to WiFi
+  WiFi.begin(ssid, password);
+
+  int attempts = 0;
+  while (WiFi.status() != WL_CONNECTED && attempts < 20) {
+    delay(500);
+    Serial.print(".");
+    attempts++;
+  }
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.print("\nConnected to WiFi: ");
+    Serial.println(WiFi.localIP());
+  } else {
+    Serial.println("\nFailed to connect to WiFi. Please check your credentials");
+  }
+}
