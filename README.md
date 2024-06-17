@@ -21,4 +21,4 @@ Added Read and Write function Using Firebase database
 
 ![GitHub Wallpaper](background/backgrounddddddd.png)
 
-Website : https://senzuku.github.io/AFFv2/
+Website : https://sencin.github.io/AFFv2/
